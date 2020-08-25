@@ -8,24 +8,24 @@ Understand the relationship between the circuntances and the outcome, that finis
 
 * Understand the data behavior <p>
   1 Histograms<p>
-  ![](img\numerica_hist.png)
-  ![](img\char_catg.png)
+  ![](img/numerica_hist.png)
+  ![](img/char_catg.png)
   2 Value counts <p>
   3 Missing data<p>
   4 correlations of some features<p>
-  ![](img\corr.png)
+  ![](img/corr.png)
 * Explore interesting themes <p>
   1 Rich people survive more?<p>
-  ![](img\pcall_survive.png)
+  ![](img/pcall_survive.png)
 
   1 Young people survive more? <p>
-  ![](img\survive_age.png)
+  ![](img/survive_age.png)
 
   2 Female survive more?, what about kids and old people<p>
-  ![](img\survive_catg_data.png)
+  ![](img/survive_catg_data.png)
 
   3 How the fare payment affects the survival<p>
-   ![](img\survive_fare.png)
+   ![](img/survive_fare.png)
 
   4 Your title name affects your chances to survive<p>
 
@@ -36,7 +36,7 @@ Understand the relationship between the circuntances and the outcome, that finis
 |1        |          127  | 81  | 99     | 3|
 
   5 Where did you embarked affects your chance to survive<p>
-  ![](img\embark_surv.png)
+  ![](img/embark_surv.png)
 
 * Feature Engineering
     * Create more features
