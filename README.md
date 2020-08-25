@@ -7,8 +7,9 @@ Understand the relationship between the circuntances and the outcome, that finis
 ## Project Planning
 
 * Understand the data behavior <p>
-  1 Histograms<p>
+  1.0 Histograms<p>
   ![](img/numerica_hist.png)
+  1.1 Barchars <p>
   ![](img/char_catg.png)
   2 Value counts <p>
   3 Missing data<p>
