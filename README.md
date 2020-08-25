@@ -39,6 +39,9 @@ Understand the relationship between the circuntances and the outcome, that finis
   5 Where did you embarked affects your chance to survive<p>
   ![](img/embark_surv.png)
 
+  6 Be alone affects your chance to survive ¿? <p>
+  7 The quantity of cabin that was bought per passenger affects the survival ¿?
+
 * Feature Engineering
     * Create more features
     * Fill nan values
