@@ -1,4 +1,5 @@
 dataset/
+submission/
 .ipynb_checkpoints
 playground.ipynb
 *.txt
