@@ -34,13 +34,14 @@ def pre_process_dataset(path_test='dataset/test.csv',path_train='dataset/train.c
     age_main = DB_train['Age'].mean()
     fare_main = DB_train['Fare'].mean()
     # Media Age for Pclass, sex and Embarked
-#     media_age = DB_train.dropna(subset=['Age'])[['Age','Pclass','Sex','Embarked']].groupby(['Pclass', 'Sex','Embarked'], as_index=False ).mean().sort_values(by='Age', ascending=True)
-    media_age = DB_train.dropna(subset=['Age'])[['Age','Pclass','Sex']].groupby(['Pclass', 'Sex'], as_index=False ).mean().sort_values(by='Age', ascending=True)
+    media_age = DB_train.dropna(subset=['Age'])[['Age','Pclass','Sex','Embarked']].groupby(['Pclass', 'Sex','Embarked'], as_index=False ).mean().sort_values(by='Age', ascending=True)
+    #media_age = DB_train.dropna(subset=['Age'])[['Age','Pclass','Sex']].groupby(['Pclass', 'Sex'], as_index=False ).mean().sort_values(by='Age', ascending=True)
     def impute_years(x):
         if x['Age'] == x['Age'] :
             return x['Age']
         else:
-            return media_age.loc[media_age['Pclass']==x['Pclass'] , ['Age', 'Sex']].loc[media_age['Sex']==x['Sex'] , ['Age']]['Age'].tolist()[0]
+            return media_age.loc[media_age['Pclass']==x['Pclass'] , ['Age', 'Sex','Embarked']].loc[media_age['Sex']==x['Sex'] , ['Age','Embarked']].loc[media_age['Embarked']==x['Embarked'] , ['Age']]['Age'].tolist()[0]
+#             return media_age.loc[media_age['Pclass']==x['Pclass'] , ['Age', 'Sex']].loc[media_age['Sex']==x['Sex'] , ['Age']]['Age'].tolist()[0]
     
     ageband_list = [min(0,DB_train['Age'].min()),16,32,48,64,max(100,DB_train['Age'].max())]
     fareband_lost = [min(-1,DB_train['Fare'].min()),85,170,256,426,max(600,DB_train['Fare'].max())]
