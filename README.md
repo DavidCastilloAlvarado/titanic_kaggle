@@ -5,6 +5,7 @@ This is Titanic Survivors Classifications for Kaggle Competitions
 Understand the relationship between the circuntances and the outcome, that finished the life of 549 human lifes. What characterized to the people, why they survived and what factors pushed his probabilities to survive are the main question that i going to review in this notebook.
 
 ## Project Planning
+    * Bonus: Automatic EDA
 
 * Understand the data behavior <p>
   1.0 Histograms<p>
@@ -52,10 +53,12 @@ Understand the relationship between the circuntances and the outcome, that finis
 * Model tunning
 * Model benchmark
 
+
 | Model  | score  | 
 |---|---|
-| SVC  |    0.872 |  
-| XGB  | 0.874 | 
-| KNC  |   0.9068|
-| Voting All| 0.9023| 
+| SVC  |    0.8907 |  
+| XGB  | 0.8843 | 
+| KNC  |   0.9335|
+| RFC |    0.9690 |
+| Voting XGB+KNC+RFC| 0.9526| 
 
