@@ -44,11 +44,11 @@ def pre_process_dataset(path_test='dataset/test.csv',path_train='dataset/train.c
 #             return media_age.loc[media_age['Pclass']==x['Pclass'] , ['Age', 'Sex']].loc[media_age['Sex']==x['Sex'] , ['Age']]['Age'].tolist()[0]
     
     ageband_list = [min(0,DB_train['Age'].min()),16,32,48,64,max(100,DB_train['Age'].max())]
-    fareband_lost = [min(-1,DB_train['Fare'].min()),85,170,256,426,max(600,DB_train['Fare'].max())]
+    fareband_lost = [min(-1,DB_train['Fare'].min()-1),85,170,256,426,max(600,DB_train['Fare'].max())]
 
     ## Fusion SibSp abd Parch
     DB_test['n_parents'] = DB_test['SibSp'] + DB_test['Parch']
-    DB_test['accompanied'] = DB_test['n_parents'].apply(lambda x: 1 if x >0 else 0)
+    DB_test['accompanied'] = DB_test['n_parents'].apply(lambda x: x if x <7 else 'nn')
     # Count how many cabins a passenger bought
     DB_test['Count_Cabin'] = DB_test['Cabin'].apply(lambda x: 0 if pd.isna(x) else len(x.split(' ')))
     # The passenger bought a cabin yes or not
@@ -56,7 +56,7 @@ def pre_process_dataset(path_test='dataset/test.csv',path_train='dataset/train.c
     # Extracting titles from Name
     DB_test['title_Name'] = DB_test['Name'].apply(lambda x: x.split(',')[1:][0].split('.')[0].strip())
     # Grouping title names using only the predominants
-    title_pred = ['Mr', 'Miss', 'Mrs']
+    title_pred = ['Mr', 'Miss', 'Mrs','Master']
     DB_test['title_Name'] = DB_test['title_Name'].apply(lambda x: x if x in title_pred else 'Others')
     # Fill NAN values
     DB_test['Embarked'] = DB_test['Embarked'].fillna(embarked_mode)
@@ -70,9 +70,10 @@ def pre_process_dataset(path_test='dataset/test.csv',path_train='dataset/train.c
     DB_test['FareBand'] = pd.cut(DB_test['Fare'], fareband_lost)
     # Normlalizing data 
     DB_test['norm_Fare']= DB_test['Fare'].apply(lambda x : np.log10(x+1))
+    DB_test['norm_Age']= DB_test['Age'].apply(lambda x : x)
     if all_categorical:
         DB_test.index  = DB_test.PassengerId
-        DB_test = DB_test.drop(columns=[ 'Cabin','Fare','Name','PassengerId', 'Count_Cabin','n_parents','Ticket','SibSp','Parch','norm_Fare', 'Age'])
+        DB_test = DB_test.drop(columns=[ 'Cabin','Fare','Name','PassengerId', 'Count_Cabin','n_parents','Ticket','SibSp','Parch','norm_Fare', 'norm_Age','Age'])
         DB_test['Pclass'] = DB_test['Pclass'].astype(str) # categorical feature
         DB_test['accompanied'] = DB_test['accompanied'].astype(str) # categorical feature
         DB_test['b_Cabin'] = DB_test['b_Cabin'].astype(str) # categorical feature
@@ -84,7 +85,7 @@ def pre_process_dataset(path_test='dataset/test.csv',path_train='dataset/train.c
         DB_test.head()
     else:
         DB_test.index  = DB_test.PassengerId
-        DB_test= DB_test.drop(columns=[ 'Cabin','Fare','Name','PassengerId', 'Count_Cabin','n_parents','Ticket','SibSp','Parch','AgeBand','FareBand' ])
+        DB_test= DB_test.drop(columns=[ 'Cabin','Fare','Name','PassengerId', 'Age','Count_Cabin','n_parents','Ticket','SibSp','Parch','AgeBand','FareBand' ])
         DB_test['Pclass'] = DB_test['Pclass'].astype(str) # categorical feature
         DB_test['accompanied'] = DB_test['accompanied'].astype(str) # categorical feature
         DB_test['b_Cabin'] = DB_test['b_Cabin'].astype(str) # categorical feature
