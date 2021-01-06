@@ -71,12 +71,13 @@ def pre_process_dataset(path_test='dataset/test.csv',path_train='dataset/train.c
     # Normlalizing data 
     DB_test['norm_Fare']= DB_test['Fare'].apply(lambda x : np.log10(x+1))
     DB_test['norm_Age']= DB_test['Age'].apply(lambda x : x)
+    DB_test['Sex'] = DB_test['Sex'].apply(lambda x: 1 if x == "male" else 0)
     if all_categorical:
         DB_test.index  = DB_test.PassengerId
         DB_test = DB_test.drop(columns=[ 'Cabin','Fare','Name','PassengerId', 'Count_Cabin','n_parents','Ticket','SibSp','Parch','norm_Fare', 'norm_Age','Age'])
         DB_test['Pclass'] = DB_test['Pclass'].astype(str) # categorical feature
         DB_test['accompanied'] = DB_test['accompanied'].astype(str) # categorical feature
-        DB_test['b_Cabin'] = DB_test['b_Cabin'].astype(str) # categorical feature
+        #DB_test['b_Cabin'] = DB_test['b_Cabin'].astype(str) # categorical feature
         DB_test['AgeBand'] = DB_test['AgeBand'].astype(str) # categorical feature
         DB_test['AgeBand'] = DB_test['AgeBand'].apply(lambda x : x.replace('(','').replace(']','').replace(',','_'))
         DB_test['FareBand'] = DB_test['FareBand'].astype(str) # categorical feature
@@ -88,7 +89,7 @@ def pre_process_dataset(path_test='dataset/test.csv',path_train='dataset/train.c
         DB_test= DB_test.drop(columns=[ 'Cabin','Fare','Name','PassengerId', 'Age','Count_Cabin','n_parents','Ticket','SibSp','Parch','AgeBand','FareBand' ])
         DB_test['Pclass'] = DB_test['Pclass'].astype(str) # categorical feature
         DB_test['accompanied'] = DB_test['accompanied'].astype(str) # categorical feature
-        DB_test['b_Cabin'] = DB_test['b_Cabin'].astype(str) # categorical feature
+        #DB_test['b_Cabin'] = DB_test['b_Cabin'].astype(str) # categorical feature
         DB_test.info()
         DB_test.head()
     DB_test = pd.get_dummies(DB_test)

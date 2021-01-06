@@ -3,3 +3,5 @@ submission/
 .ipynb_checkpoints
 playground.ipynb
 *.txt
+__pycache__
+.virtual_documents
